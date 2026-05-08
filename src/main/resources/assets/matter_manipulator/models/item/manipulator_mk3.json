@@ -1,0 +1,6 @@
+{
+  "parent": "item/handheld",
+  "textures": {
+    "layer0": "matter_manipulator:item/manipulator_mk3"
+  }
+}

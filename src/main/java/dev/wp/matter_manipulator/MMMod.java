@@ -1,0 +1,42 @@
+package dev.wp.matter_manipulator;
+
+import com.mojang.logging.LogUtils;
+import dev.wp.matter_manipulator.common.config.MMModConfig;
+import dev.wp.matter_manipulator.common.items.MMItems;
+import dev.wp.matter_manipulator.common.networking.MMNetwork;
+import net.minecraft.resources.ResourceLocation;
+import net.minecraftforge.common.MinecraftForge;
+import net.minecraftforge.eventbus.api.IEventBus;
+import net.minecraftforge.fml.ModLoadingContext;
+import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.config.ModConfig;
+import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
+import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
+import org.slf4j.Logger;
+
+@Mod(MMMod.MODID)
+public class MMMod {
+    public static final String MODID = "matter_manipulator";
+    public static final Logger LOGGER = LogUtils.getLogger();
+
+    public MMMod(FMLJavaModLoadingContext ctx) {
+        IEventBus modBus = ctx.getModEventBus();
+
+        MMItems.ITEMS.register(modBus);
+        MMItems.CREATIVE_MODE_TABS.register(modBus);
+
+        modBus.addListener(this::commonSetup);
+
+        ctx.registerConfig(ModConfig.Type.COMMON, MMModConfig.SPEC);
+
+        MinecraftForge.EVENT_BUS.register(this);
+    }
+
+    private void commonSetup(FMLCommonSetupEvent event) {
+        event.enqueueWork(MMNetwork::init);
+    }
+
+    public static ResourceLocation id(String path) {
+        return ResourceLocation.tryParse(MODID + ":" + path);
+    }
+}
