@@ -1,5 +1,6 @@
 package dev.wp.matter_manipulator.common.building;
 
+import dev.wp.matter_manipulator.BlockTags;
 import dev.wp.matter_manipulator.MMMod;
 import dev.wp.matter_manipulator.common.config.MMModConfig;
 import dev.wp.matter_manipulator.common.items.manipulator.MMState;
@@ -7,12 +8,9 @@ import dev.wp.matter_manipulator.common.items.manipulator.MMTier;
 import dev.wp.matter_manipulator.common.items.manipulator.PlaceMode;
 import dev.wp.matter_manipulator.common.items.manipulator.RemoveMode;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.registries.Registries;
 import net.minecraft.network.chat.Component;
-import net.minecraft.resources.ResourceLocation;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundSource;
-import net.minecraft.tags.TagKey;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.Block;
@@ -167,7 +165,7 @@ public class PendingBuild {
 
             // Remove existing block first
             if (!existingState.isAir()) {
-                if (!isOre(existingState)) {
+                if (!dropBlacklisted(existingState)) {
                     var drops = Block.getDrops(existingState, level, pb.relPos, level.getBlockEntity(pb.relPos), player, stack);
                     for (var drop : drops) {
                         inv.give(drop);
@@ -256,13 +254,7 @@ public class PendingBuild {
         return Math.max(1L, (long) (base * distMult * tileMult));
     }
 
-    private static boolean isOre(BlockState state) {
-        if (state.is(Tags.Blocks.ORES)) return true;
-        // Fallback for some common ore tags if Forge's ORES is not used correctly by some mods
-        var tags = state.getTags().toList();
-        for (var tag : tags) {
-            if (tag.location().getPath().contains("ores")) return true;
-        }
-        return false;
+    private static boolean dropBlacklisted(BlockState state) {
+        return state.is(BlockTags.DROP_BLACKLISTED);
     }
 }
