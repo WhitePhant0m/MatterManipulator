@@ -245,7 +245,7 @@ public class MMRenderer {
                 eff.coordB = null;
             }
             case MARK_COPY_B, MARK_CUT_B -> eff.coordB = loc;
-            case MARK_PASTE -> eff.coordC = loc;
+            case MARK_PASTE_A -> eff.coordC = loc;
             default -> {}
         }
         return eff;

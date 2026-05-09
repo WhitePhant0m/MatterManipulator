@@ -3,7 +3,10 @@ package dev.wp.matter_manipulator.common.items;
 import dev.wp.matter_manipulator.MMMod;
 import dev.wp.matter_manipulator.common.items.manipulator.ItemMatterManipulator;
 import dev.wp.matter_manipulator.common.items.manipulator.MMTier;
+import net.minecraft.core.registries.Registries;
+import net.minecraft.network.chat.Component;
 import net.minecraft.world.item.CreativeModeTab;
+import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -11,11 +14,11 @@ import net.minecraftforge.registries.RegistryObject;
 
 public class MMItems {
 
-    public static final DeferredRegister<net.minecraft.world.item.Item> ITEMS =
+    public static final DeferredRegister<Item> ITEMS =
         DeferredRegister.create(ForgeRegistries.ITEMS, MMMod.MODID);
 
     public static final DeferredRegister<CreativeModeTab> CREATIVE_MODE_TABS =
-        DeferredRegister.create(net.minecraft.core.registries.Registries.CREATIVE_MODE_TAB, MMMod.MODID);
+        DeferredRegister.create(Registries.CREATIVE_MODE_TAB, MMMod.MODID);
 
     public static final RegistryObject<ItemMatterManipulator> MANIPULATOR_PROTO =
         ITEMS.register("manipulator_proto", () -> new ItemMatterManipulator(MMTier.PROTO));
@@ -31,7 +34,7 @@ public class MMItems {
 
     public static final RegistryObject<CreativeModeTab> MATTER_MANIPULATOR_TAB =
         CREATIVE_MODE_TABS.register("matter_manipulator_tab", () -> CreativeModeTab.builder()
-            .title(net.minecraft.network.chat.Component.translatable("itemGroup.matter_manipulator"))
+            .title(Component.translatable("itemGroup.matter_manipulator"))
             .icon(() -> new ItemStack(MANIPULATOR_PROTO.get()))
             .displayItems((params, output) -> {
                 output.accept(MANIPULATOR_PROTO.get());

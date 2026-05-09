@@ -4,6 +4,7 @@ import dev.wp.matter_manipulator.common.items.manipulator.BlockSelectMode;
 import dev.wp.matter_manipulator.common.items.manipulator.MMState;
 import dev.wp.matter_manipulator.common.items.manipulator.PendingAction;
 import net.minecraft.network.FriendlyByteBuf;
+import net.minecraft.network.chat.Component;
 import net.minecraft.server.level.ServerPlayer;
 import net.minecraftforge.network.NetworkEvent;
 
@@ -46,7 +47,7 @@ public class PacketSetPendingAction {
             state.saveIfDirty();
 
             if (pkt.action != null) {
-                player.sendSystemMessage(net.minecraft.network.chat.Component.literal(
+                player.sendSystemMessage(Component.literal(
                     "Right-click a block to: " + actionDescription(pkt.action)));
             }
         });
@@ -60,7 +61,8 @@ public class PacketSetPendingAction {
             case MARK_COPY_B -> "mark copy corner B";
             case MARK_CUT_A -> "mark cut corner A";
             case MARK_CUT_B -> "mark cut corner B";
-            case MARK_PASTE -> "set paste target";
+            case MARK_PASTE_A -> "mark paste corner A";
+            case MARK_PASTE_B -> "mark paste corner B";
             case EXCH_ADD_REPLACE -> "add block to replace whitelist";
             case EXCH_SET_REPLACE -> "set replace whitelist";
             case EXCH_SET_TARGET -> "set block to replace with";

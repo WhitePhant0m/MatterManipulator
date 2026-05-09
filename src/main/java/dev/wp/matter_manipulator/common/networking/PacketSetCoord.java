@@ -174,7 +174,7 @@ public class PacketSetCoord {
                 cfg.action = null;
                 player.sendSystemMessage(Component.literal("Cut B set."));
             }
-            case MARK_PASTE -> {
+            case MARK_PASTE_A -> {
                 cfg.coordC = loc;
                 cfg.action = null;
                 player.sendSystemMessage(Component.literal("Paste target set."));

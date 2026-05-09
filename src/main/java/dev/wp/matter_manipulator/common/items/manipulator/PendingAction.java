@@ -6,18 +6,22 @@ public enum PendingAction {
     MARK_COPY_B,
     MARK_CUT_A,
     MARK_CUT_B,
-    MARK_PASTE,
+    MARK_PASTE_A,
+    MARK_PASTE_B,
     EXCH_ADD_REPLACE,
     EXCH_SET_REPLACE,
     EXCH_SET_TARGET,
     PICK_CABLE,
-    /** Waiting for the user to right-click to set corner B after corner A was anchored. */
+    /**
+     * Waiting for the user to right-click to set corner B after corner A was anchored.
+     */
     MOVING_COORDS;
 
     public boolean isDirectBlockPick() {
         return this == GEOM_SELECTING_BLOCK
-            || this == EXCH_ADD_REPLACE
-            || this == EXCH_SET_REPLACE
-            || this == PICK_CABLE;
+                || this == EXCH_ADD_REPLACE
+                || this == EXCH_SET_REPLACE
+                || this == EXCH_SET_TARGET
+                || this == PICK_CABLE;
     }
 }

@@ -186,7 +186,7 @@ public class ItemMatterManipulator extends Item {
             }
             MMNetwork.CHANNEL.sendToServer(new PacketSetPendingAction(PendingAction.MARK_COPY_A, null));
         }).done();
-        b.option().label("Mark Paste").onClicked(() -> MMNetwork.CHANNEL.sendToServer(new PacketSetPendingAction(PendingAction.MARK_PASTE, null))).done();
+        b.option().label("Mark Paste").onClicked(() -> MMNetwork.CHANNEL.sendToServer(new PacketSetPendingAction(PendingAction.MARK_PASTE_A, null))).done();
     }
 
     @OnlyIn(Dist.CLIENT)
@@ -200,7 +200,7 @@ public class ItemMatterManipulator extends Item {
             }
             MMNetwork.CHANNEL.sendToServer(new PacketSetPendingAction(PendingAction.MARK_CUT_A, null));
         }).done();
-        b.option().label("Mark Paste").onClicked(() -> MMNetwork.CHANNEL.sendToServer(new PacketSetPendingAction(PendingAction.MARK_PASTE, null))).done();
+        b.option().label("Mark Paste").onClicked(() -> MMNetwork.CHANNEL.sendToServer(new PacketSetPendingAction(PendingAction.MARK_PASTE_A, null))).done();
     }
 
     @OnlyIn(Dist.CLIENT)

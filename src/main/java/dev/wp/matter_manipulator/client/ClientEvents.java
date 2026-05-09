@@ -82,7 +82,7 @@ public class ClientEvents {
             if (mode != PlaceMode.COPYING && mode != PlaceMode.MOVING) {
                 MMNetwork.CHANNEL.sendToServer(new PacketSetPlaceMode(PlaceMode.COPYING));
             }
-            MMNetwork.CHANNEL.sendToServer(new PacketSetPendingAction(PendingAction.MARK_PASTE, null));
+            MMNetwork.CHANNEL.sendToServer(new PacketSetPendingAction(PendingAction.MARK_PASTE_A, null));
             return;
         }
 
